@@ -39,7 +39,7 @@ public class Communication {
     private CloseableHttpClient httpClient;
     private final int KEEP_ALIVE_DURATION = 8000;
     private final String CONTENT_TYPE_HEADER = "Content-Type";
-    private final String HEADER_VALUE = "application/com.vantivcnp.payfac-v16+xml";
+    private final String HEADER_VALUE = "application/com.vantivcnp.payfac-v17+xml";
     private final String ACCEPT_HEADER = "Accept";
     private final String CONNECTION_EXCEPTION_MESSAGE = "Error connecting to Vantiv";
     private final String XML_ENCODING = "UTF-8";

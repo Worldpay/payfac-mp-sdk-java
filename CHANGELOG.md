@@ -1,5 +1,8 @@
 CHANGELOG
 ---------
+## 17.0.0
+* **Feature** Addition of Value Added Services to Requests
+
 ## 16.0.0
 * **Feature** Merchant Category Code No Longer Optional on Legal Entity Create Request
 
