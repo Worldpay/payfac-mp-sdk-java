@@ -2,21 +2,10 @@ package io.github.vantiv.mp.sdk.functionalTest;
 
 import java.util.Properties;
 
+import io.github.vantiv.mp.sdk.*;
 import org.junit.Before;
 import org.junit.Test;
 import static org.junit.Assert.*;
-
-import io.github.vantiv.mp.sdk.AddressUpdatable;
-import io.github.vantiv.mp.sdk.Communication;
-import io.github.vantiv.mp.sdk.Configuration;
-import io.github.vantiv.mp.sdk.PayFacSubMerchant;
-import io.github.vantiv.mp.sdk.Response;
-import io.github.vantiv.mp.sdk.SubMerchantCreateRequest;
-import io.github.vantiv.mp.sdk.SubMerchantCreateResponse;
-import io.github.vantiv.mp.sdk.SubMerchantECheckFeature;
-import io.github.vantiv.mp.sdk.SubMerchantPrimaryContactUpdatable;
-import io.github.vantiv.mp.sdk.SubMerchantRetrievalResponse;
-import io.github.vantiv.mp.sdk.SubMerchantUpdateRequest;
 
 public class TestPayFacSubMerchant {
     PayFacSubMerchant payFacSubMerchant;
@@ -40,6 +29,9 @@ public class TestPayFacSubMerchant {
     SubMerchantPrimaryContactUpdatable primaryContactUpdatable;
     SubMerchantECheckFeature eCheckFeature;
 
+    ValueAddedServices valueAddedServices;
+    ValueAddedServices.Service service;
+
     @Before
     public void setUp(){
         communication = new Communication();
@@ -60,6 +52,12 @@ public class TestPayFacSubMerchant {
         pspMerchantId = "112";
         settlementCurrency = "123";
 
+        service = new ValueAddedServices.Service();
+        valueAddedServices = new ValueAddedServices();
+        service.setCode(ValueAddedServiceProductCode.DISPUTE_DEFENDER);
+        service.setEnabled(false);
+        valueAddedServices.getServices().add(service);
+
         request.setMerchantName(name);
         request.setUrl(url);
         request.setCustomerServiceNumber(customerServiceNumber);
@@ -70,6 +68,7 @@ public class TestPayFacSubMerchant {
         request.setBankAccountNumber(bankAccountNumber);
         request.setPspMerchantId(pspMerchantId);
         request.setSettlementCurrency(settlementCurrency);
+        request.setValueAddedServices(valueAddedServices);
 
         address = new AddressUpdatable();
         address.setStreetAddress1("Street Address 1");
@@ -99,6 +98,7 @@ public class TestPayFacSubMerchant {
         updateRequest.setAddress(address);
         updateRequest.setPrimaryContact(primaryContactUpdatable);
         updateRequest.setECheck(eCheckFeature);
+        updateRequest.setValueAddedServices(valueAddedServices);
 
     }
 

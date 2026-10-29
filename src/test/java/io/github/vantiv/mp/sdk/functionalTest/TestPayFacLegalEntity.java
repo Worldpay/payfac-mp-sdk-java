@@ -4,25 +4,10 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.Properties;
 
+import io.github.vantiv.mp.sdk.*;
 import org.junit.Before;
 import org.junit.Test;
 import static org.junit.Assert.*;
-
-import io.github.vantiv.mp.sdk.Address;
-import io.github.vantiv.mp.sdk.AddressUpdatable;
-import io.github.vantiv.mp.sdk.Communication;
-import io.github.vantiv.mp.sdk.Configuration;
-import io.github.vantiv.mp.sdk.LegalEntityCreateRequest;
-import io.github.vantiv.mp.sdk.LegalEntityCreateResponse;
-import io.github.vantiv.mp.sdk.LegalEntityOwnershipType;
-import io.github.vantiv.mp.sdk.LegalEntityPrincipal;
-import io.github.vantiv.mp.sdk.LegalEntityPrincipalUpdatable;
-import io.github.vantiv.mp.sdk.LegalEntityResponse;
-import io.github.vantiv.mp.sdk.LegalEntityRetrievalResponse;
-import io.github.vantiv.mp.sdk.LegalEntityType;
-import io.github.vantiv.mp.sdk.LegalEntityUpdateRequest;
-import io.github.vantiv.mp.sdk.PayFacLegalEntity;
-import io.github.vantiv.mp.sdk.PrincipalAddress;
 
 public class TestPayFacLegalEntity {
 
@@ -77,6 +62,7 @@ public class TestPayFacLegalEntity {
         calendar = Calendar.getInstance();
         calendar.setTime(date);
 
+
         principal = new LegalEntityPrincipal();
         legalEntityPrincipalUpdatable = new LegalEntityPrincipalUpdatable();
         principal.setTitle("Chief Financial Officer");
@@ -106,6 +92,7 @@ public class TestPayFacLegalEntity {
         createRequest.setHasAcceptedCreditCards(true);
         createRequest.setAddress(address);
         createRequest.setPrincipal(principal);
+        createRequest.setTaxIdType(TaxIdTypeCode.EIN);
 
         updateRequest = new LegalEntityUpdateRequest();
         updateRequest.setAddress(addressUpdatable);
@@ -114,6 +101,7 @@ public class TestPayFacLegalEntity {
         updateRequest.setAnnualCreditCardSalesVolume(100000000l);
         updateRequest.setHasAcceptedCreditCards(true);
         updateRequest.setPrincipal(legalEntityPrincipalUpdatable);
+        updateRequest.setTaxIdType(TaxIdTypeCode.SSN);
 
     }
 

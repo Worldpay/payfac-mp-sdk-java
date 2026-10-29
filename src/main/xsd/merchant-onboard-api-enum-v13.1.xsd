@@ -221,4 +221,16 @@
         </xs:restriction>
     </xs:simpleType>
 
+    <xs:simpleType name="valueAddedServiceProductCode">
+        <xs:restriction base="xs:string">
+            <xs:enumeration value="DISPUTE_DEFENDER"/>
+        </xs:restriction>
+    </xs:simpleType>
+
+    <xs:simpleType name="taxIdTypeCode">
+        <xs:restriction base="xs:string">
+            <xs:enumeration value="EIN"/>
+            <xs:enumeration value="SSN"/>
+        </xs:restriction>
+    </xs:simpleType>
 </xs:schema>

@@ -4,20 +4,10 @@ import static org.junit.Assert.assertNotNull;
 import static org.mockito.ArgumentMatchers.matches;
 import static org.mockito.Mockito.when;
 
+import io.github.vantiv.mp.sdk.*;
 import org.junit.Before;
 import org.junit.Test;
 import org.mockito.Mockito;
-
-import io.github.vantiv.mp.sdk.AddressUpdatable;
-import io.github.vantiv.mp.sdk.Communication;
-import io.github.vantiv.mp.sdk.PayFacSubMerchant;
-import io.github.vantiv.mp.sdk.Response;
-import io.github.vantiv.mp.sdk.SubMerchantCreateRequest;
-import io.github.vantiv.mp.sdk.SubMerchantCreateResponse;
-import io.github.vantiv.mp.sdk.SubMerchantECheckFeature;
-import io.github.vantiv.mp.sdk.SubMerchantPrimaryContactUpdatable;
-import io.github.vantiv.mp.sdk.SubMerchantRetrievalResponse;
-import io.github.vantiv.mp.sdk.SubMerchantUpdateRequest;
 
 public class TestPayFacSubMerchant {
     PayFacSubMerchant payFacSubMerchant;
@@ -36,7 +26,8 @@ public class TestPayFacSubMerchant {
     AddressUpdatable address;
     SubMerchantPrimaryContactUpdatable primaryContactUpdatable;
     SubMerchantECheckFeature eCheckFeature;
-
+    ValueAddedServices valueAddedServices;
+    ValueAddedServices.Service service;
     @Before
     public void setUp(){
         payFacSubMerchant = new PayFacSubMerchant();
@@ -62,6 +53,14 @@ public class TestPayFacSubMerchant {
         request.setBankAccountNumber(bankAccountNumber);
         request.setPspMerchantId(pspMerchantId);
         request.setSettlementCurrency(settlementCurrency);
+
+        service = new ValueAddedServices.Service();
+        valueAddedServices = new ValueAddedServices();
+        service.setCode(ValueAddedServiceProductCode.DISPUTE_DEFENDER);
+        service.setEnabled(true);
+        valueAddedServices.getServices().add(service);
+
+        request.setValueAddedServices(valueAddedServices);
 
         address = new AddressUpdatable();
         address.setStreetAddress1("Street Address 1");
@@ -91,6 +90,7 @@ public class TestPayFacSubMerchant {
         updateRequest.setAddress(address);
         updateRequest.setPrimaryContact(primaryContactUpdatable);
         updateRequest.setECheck(eCheckFeature);
+        updateRequest.setValueAddedServices(valueAddedServices);
     }
 
     @Test
@@ -185,6 +185,12 @@ public class TestPayFacSubMerchant {
                 "<settlementCurrency>USD</settlementCurrency>" +
                 "<sdkVersion>13.1.0</sdkVersion>" +
                 "<language>java</language>" +
+                "<valueAddedServices>" +
+                "<service>" +
+                "<code>DISPUTE_DEFENDER</code>" +
+                "<enabled>true</enabled>" +
+                "</service><" +
+                "/valueAddedServices>" +
                 "</subMerchantCreateRequest>";
         String mockedResponse = "<subMerchantCreateResponse " +
                 "xmlns=\"http://payfac.vantivcnp.com/api/merchant/onboard\" duplicate=\"true\">" +
@@ -229,8 +235,14 @@ public class TestPayFacSubMerchant {
                 "<bankAccountNumber>1234</bankAccountNumber>" +
                 "<pspMerchantId>112</pspMerchantId>" +
                 "<settlementCurrency>USD</settlementCurrency>" +
-                "<sdkVersion>13.1.0</sdkVersion>" +
+                "<sdkVersion>13.1.2</sdkVersion>" +
                 "<language>java</language>" +
+                "<valueAddedServices>" +
+                "<service>" +
+                "<code>DISPUTE_DEFENDER</code>" +
+                "<enabled>true</enabled>" +
+                "</service><" +
+                "/valueAddedServices>" +
                 "</subMerchantCreateRequest>";
         String mockedResponse = "<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"yes\"?>" +
                 "<subMerchantCreateResponse " +
@@ -263,8 +275,14 @@ public class TestPayFacSubMerchant {
                 "<bankAccountNumber>1234</bankAccountNumber>" +
                 "<pspMerchantId>112</pspMerchantId>" +
                 "<settlementCurrency>USD</settlementCurrency>" +
-                "<sdkVersion>13.1.0</sdkVersion>" +
+                "<sdkVersion>13.1.2</sdkVersion>" +
                 "<language>java</language>" +
+                "<valueAddedServices>" +
+                "<service>" +
+                "<code>DISPUTE_DEFENDER</code>" +
+                "<enabled>true</enabled>" +
+                "</service><" +
+                "/valueAddedServices>" +
                 "</subMerchantCreateRequest>";
         String mockedResponse = "<subMerchantCreateResponse " +
                 "xmlns=\"http://payfac.vantivcnp.com/api/merchant/onboard\" duplicate=\"true\">" +
@@ -338,6 +356,12 @@ public class TestPayFacSubMerchant {
                 "<eCheck>" +
                 "<eCheckBillingDescriptor>9785552222</eCheckBillingDescriptor>" +
                 "</eCheck>" +
+                "<valueAddedServices>" +
+                "<service>" +
+                "<code>DISPUTE_DEFENDER</code>" +
+                "<enabled>true</enabled>" +
+                "</service><" +
+                "/valueAddedServices>" +
                 "</subMerchantUpdateRequest>";
         String mockedResponse = "<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"yes\"?>" +
                 "<response xmlns=\"http://payfac.vantivcnp.com/api/merchant/onboard\">" +

@@ -1,6 +1,10 @@
 CHANGELOG
 ---------
 
+## 13.1.2
+* **Feature** Addition of Value Added Services to Requests.
+* **Feature** taxIdType to API Requests
+
 ## 13.1.1
 * **Feature** Support for Merchant Category Code - Payfac MP API version 13.1.1
 

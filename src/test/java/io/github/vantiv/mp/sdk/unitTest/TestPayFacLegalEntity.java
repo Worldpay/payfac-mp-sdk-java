@@ -1,30 +1,18 @@
 package io.github.vantiv.mp.sdk.unitTest;
 
 import static org.junit.Assert.assertNotNull;
+import static org.mockito.ArgumentMatchers.anyString;
+import static org.mockito.ArgumentMatchers.eq;
 import static org.mockito.ArgumentMatchers.matches;
 import static org.mockito.Mockito.when;
 
 import java.util.Calendar;
 import java.util.Date;
 
+import io.github.vantiv.mp.sdk.*;
 import org.junit.Before;
 import org.junit.Test;
 import org.mockito.Mockito;
-
-import io.github.vantiv.mp.sdk.Address;
-import io.github.vantiv.mp.sdk.AddressUpdatable;
-import io.github.vantiv.mp.sdk.Communication;
-import io.github.vantiv.mp.sdk.LegalEntityCreateRequest;
-import io.github.vantiv.mp.sdk.LegalEntityCreateResponse;
-import io.github.vantiv.mp.sdk.LegalEntityOwnershipType;
-import io.github.vantiv.mp.sdk.LegalEntityPrincipal;
-import io.github.vantiv.mp.sdk.LegalEntityPrincipalUpdatable;
-import io.github.vantiv.mp.sdk.LegalEntityResponse;
-import io.github.vantiv.mp.sdk.LegalEntityRetrievalResponse;
-import io.github.vantiv.mp.sdk.LegalEntityType;
-import io.github.vantiv.mp.sdk.LegalEntityUpdateRequest;
-import io.github.vantiv.mp.sdk.PayFacLegalEntity;
-import io.github.vantiv.mp.sdk.PrincipalAddress;
 
 public class TestPayFacLegalEntity {
     PayFacLegalEntity payFacLegalEntity;
@@ -101,6 +89,7 @@ public class TestPayFacLegalEntity {
         createRequest.setAddress(address);
         createRequest.setPrincipal(principal);
         createRequest.setYearsInBusiness("12");
+        createRequest.setTaxIdType(TaxIdTypeCode.EIN);
 
         updateRequest = new LegalEntityUpdateRequest();
         updateRequest.setAddress(addressUpdatable);
@@ -109,6 +98,7 @@ public class TestPayFacLegalEntity {
         updateRequest.setAnnualCreditCardSalesVolume(100000000l);
         updateRequest.setHasAcceptedCreditCards(true);
         updateRequest.setPrincipal(legalEntityPrincipalUpdatable);
+        updateRequest.setTaxIdType(TaxIdTypeCode.EIN);
     }
 
     @Test
@@ -300,7 +290,7 @@ public class TestPayFacLegalEntity {
                 "<stakePercent>33</stakePercent>" +
                 "</principal>" +
                 "<yearsInBusiness>12</yearsInBusiness>" +
-                "<sdkVersion>13.1.0</sdkVersion>" +
+                "<sdkVersion>13.1.2</sdkVersion>" +
                 "<language>java</language>" +
                 "</legalEntityCreateRequest>";
         String mockedResponse = "<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"yes\"?>" +
@@ -426,8 +416,7 @@ public class TestPayFacLegalEntity {
     public void testPutByLegalEntity(){
         String expectedRequestUrl = "https://www.testvantivcnp.com/sandbox/payfac/legalentity/1000293";
         String expectedRequest = "<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"yes\"?>" +
-                "<legalEntityUpdateRequest " +
-                "xmlns=\"http://payfac.vantivcnp.com/api/merchant/onboard\">" +
+                "<legalEntityUpdateRequest xmlns=\"http://payfac.vantivcnp.com/api/merchant/onboard\">" +
                 "<address>" +
                 "<streetAddress1>Street Address 1</streetAddress1>" +
                 "<streetAddress2>Street Address 2</streetAddress2>" +
@@ -454,6 +443,7 @@ public class TestPayFacLegalEntity {
                 "<countryCode>USA</countryCode>" +
                 "</address>" +
                 "</principal>" +
+                "<taxIdType>EIN</taxIdType>" +
                 "</legalEntityUpdateRequest>";
         String mockedResponse = "<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"yes\"?>" +
                 "<legalEntityResponse xmlns=\"http://payfac.vantivcnp.com/api/merchant/onboard\">" +

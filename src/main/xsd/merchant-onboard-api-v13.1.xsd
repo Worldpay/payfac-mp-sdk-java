@@ -24,7 +24,7 @@
   <xs:element name="principalCreateResponse" type="tns:principalCreateResponse"/>
 
   <xs:element name="legalEntityPrincipalCreateResponseWithResponseFields" type="tns:legalEntityPrincipalCreateResponseWithResponseFields"/>
-  
+
   <xs:element name="legalEntityPrincipalCreateResponse" type="tns:legalEntityPrincipalCreateResponse"/>
   
   <xs:element name="legalEntityPrincipalDeleteResponse" type="tns:legalEntityPrincipalDeleteResponse"/>
@@ -52,7 +52,7 @@
   <xs:element name="legalEntityAgreementRetrievalResponse" type="tns:legalEntityAgreementRetrievalResponse"/>
 
   <xs:element name="principalDeleteResponse" type="tns:principalDeleteResponse"/>
-  
+
   <xs:complexType name="legalEntityCreateRequest">
     <xs:sequence>
       <xs:element name="legalEntityName" >
@@ -115,6 +115,8 @@
                 </xs:restriction>
             </xs:simpleType>
         </xs:element>
+
+        <xs:element name="taxIdType" type="tns:taxIdTypeCode" minOccurs="0"/>
 
         <xs:element name="sdkVersion" minOccurs="0">
             <xs:simpleType>
@@ -876,6 +878,7 @@
             </xs:restriction>
           </xs:simpleType>
         </xs:element>
+        <xs:element name="taxIdType" type="tns:taxIdTypeCode" minOccurs="0"/>
     </xs:sequence>
   </xs:complexType>
 
@@ -1183,6 +1186,7 @@
                 </xs:restriction>
             </xs:simpleType>
         </xs:element>
+        <xs:element name="valueAddedServices" type="tns:valueAddedServices" minOccurs="0" />
     </xs:sequence>
   </xs:complexType>
 
@@ -1512,6 +1516,7 @@
       <xs:element name="subMerchantFunding" type="tns:subMerchantFunding" minOccurs="0"/>
       <xs:element name="taxAuthority" type="xs:string" minOccurs="0"/>
       <xs:element name="taxAuthorityState" type="xs:string" minOccurs="0"/>
+        <xs:element name="valueAddedServices" type="tns:valueAddedServices" minOccurs="0" />
     </xs:sequence>
   </xs:complexType>
 
@@ -1775,6 +1780,19 @@
                         <xs:maxLength value="100"/>
                     </xs:restriction>
                 </xs:simpleType>
+            </xs:element>
+        </xs:sequence>
+    </xs:complexType>
+
+    <xs:complexType name="valueAddedServices">
+        <xs:sequence>
+            <xs:element maxOccurs="unbounded" name="service">
+                <xs:complexType>
+                    <xs:sequence>
+                        <xs:element name="code" type="tns:valueAddedServiceProductCode" />
+                        <xs:element name="enabled" type="xs:boolean"/>
+                    </xs:sequence>
+                </xs:complexType>
             </xs:element>
         </xs:sequence>
     </xs:complexType>
