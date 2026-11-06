@@ -23,6 +23,7 @@ import io.github.vantiv.mp.sdk.LegalEntityType;
 import io.github.vantiv.mp.sdk.LegalEntityUpdateRequest;
 import io.github.vantiv.mp.sdk.PayFacLegalEntity;
 import io.github.vantiv.mp.sdk.PrincipalAddress;
+import io.github.vantiv.mp.sdk.TaxIdTypeCode;
 
 public class TestPayFacLegalEntity {
 
@@ -106,6 +107,7 @@ public class TestPayFacLegalEntity {
         createRequest.setHasAcceptedCreditCards(true);
         createRequest.setAddress(address);
         createRequest.setPrincipal(principal);
+        createRequest.setTaxIdType(TaxIdTypeCode.EIN);
 
         updateRequest = new LegalEntityUpdateRequest();
         updateRequest.setAddress(addressUpdatable);
@@ -114,6 +116,7 @@ public class TestPayFacLegalEntity {
         updateRequest.setAnnualCreditCardSalesVolume(100000000l);
         updateRequest.setHasAcceptedCreditCards(true);
         updateRequest.setPrincipal(legalEntityPrincipalUpdatable);
+        updateRequest.setTaxIdType(TaxIdTypeCode.SSN);
 
     }
 

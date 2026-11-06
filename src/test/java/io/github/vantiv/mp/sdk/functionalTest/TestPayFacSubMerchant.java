@@ -17,6 +17,8 @@ import io.github.vantiv.mp.sdk.SubMerchantECheckFeature;
 import io.github.vantiv.mp.sdk.SubMerchantPrimaryContactUpdatable;
 import io.github.vantiv.mp.sdk.SubMerchantRetrievalResponse;
 import io.github.vantiv.mp.sdk.SubMerchantUpdateRequest;
+import io.github.vantiv.mp.sdk.ValueAddedServiceProductCode;
+import io.github.vantiv.mp.sdk.ValueAddedServices;
 
 public class TestPayFacSubMerchant {
     PayFacSubMerchant payFacSubMerchant;
@@ -43,6 +45,8 @@ public class TestPayFacSubMerchant {
     AddressUpdatable address;
     SubMerchantPrimaryContactUpdatable primaryContactUpdatable;
     SubMerchantECheckFeature eCheckFeature;
+    ValueAddedServices valueAddedServices;
+    ValueAddedServices.Service service;
 
     @Before
     public void setUp(){
@@ -66,6 +70,11 @@ public class TestPayFacSubMerchant {
         categoryType = new SubMerchantCreateRequest.MerchantCategoryTypes();
         categoryType.getCategoryTypes().add("SM");
        // categoryType.getCategoryTypes().add("CLEAR");
+        service = new ValueAddedServices.Service();
+        valueAddedServices = new ValueAddedServices();
+        service.setCode(ValueAddedServiceProductCode.DISPUTE_DEFENDER);
+        service.setEnabled(false);
+        valueAddedServices.getServices().add(service);
 
         request.setMerchantName(name);
         request.setUrl(url);
@@ -78,6 +87,7 @@ public class TestPayFacSubMerchant {
         request.setPspMerchantId(pspMerchantId);
         request.setSettlementCurrency(settlementCurrency);
         request.setMerchantCategoryTypes(categoryType);
+        request.setValueAddedServices(valueAddedServices);
 
         address = new AddressUpdatable();
         address.setStreetAddress1("Street Address 1");
@@ -117,6 +127,7 @@ public class TestPayFacSubMerchant {
         updateRequest.setECheck(eCheckFeature);
         updateRequest.setMerchantCategoryTypes(updateCategoryType);
         updateRequest.setMethodOfPayments(methodOfPayments);
+        updateRequest.setValueAddedServices(valueAddedServices);
 
     }
 
