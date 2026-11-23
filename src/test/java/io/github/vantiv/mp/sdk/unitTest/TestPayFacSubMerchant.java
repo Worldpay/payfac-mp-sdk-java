@@ -33,6 +33,8 @@ public class TestPayFacSubMerchant {
     SubMerchantRevenueBoostFeature revenueBoostFeature;
     ComplianceProducts.Product product;
     ComplianceProducts complianceProducts;
+    ValueAddedServices valueAddedServices;
+    ValueAddedServices.Service service;
     @Before
     public void setUp(){
         payFacSubMerchant = new PayFacSubMerchant();
@@ -75,6 +77,13 @@ public class TestPayFacSubMerchant {
         request.setCountryOfOrigin("CAN");
         request.setRevenueBoost(revenueBoostFeature);
         request.setComplianceProducts(complianceProducts);
+        service = new ValueAddedServices.Service();
+        valueAddedServices = new ValueAddedServices();
+        service.setCode(ValueAddedServiceProductCode.DISPUTE_DEFENDER);
+        service.setEnabled(true);
+        valueAddedServices.getServices().add(service);
+
+        request.setValueAddedServices(valueAddedServices);
 
         address = new AddressUpdatable();
         address.setStreetAddress1("Street Address 1");
@@ -120,6 +129,7 @@ public class TestPayFacSubMerchant {
         updateRequest.setCountryOfOrigin("CAN");
         updateRequest.setRevenueBoost(revenueBoostFeature);
         updateRequest.setComplianceProducts(complianceProducts);
+        updateRequest.setValueAddedServices(valueAddedServices);
     }
 
     @Test
@@ -225,6 +235,12 @@ public class TestPayFacSubMerchant {
                 "</complianceProducts>"+
                 "<sdkVersion>15.0.0</sdkVersion>" +
                 "<language>java</language>" +
+                "<valueAddedServices>" +
+                "<service>" +
+                "<code>DISPUTE_DEFENDER</code>" +
+                "<enabled>true</enabled>" +
+                "</service><" +
+                "/valueAddedServices>" +
                 "</subMerchantCreateRequest>";
         String mockedResponse = "<subMerchantCreateResponse " +
                 "xmlns=\"http://payfac.vantivcnp.com/api/merchant/onboard\" duplicate=\"true\">" +
@@ -271,6 +287,12 @@ public class TestPayFacSubMerchant {
                 "<settlementCurrency>USD</settlementCurrency>" +
                 "<sdkVersion>15.0.0</sdkVersion>" +
                 "<language>java</language>" +
+                "<valueAddedServices>" +
+                "<service>" +
+                "<code>DISPUTE_DEFENDER</code>" +
+                "<enabled>true</enabled>" +
+                "</service><" +
+                "/valueAddedServices>" +
                 "</subMerchantCreateRequest>";
         String mockedResponse = "<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"yes\"?>" +
                 "<subMerchantCreateResponse " +

@@ -1,5 +1,10 @@
 CHANGELOG
 ---------
+
+## 15.0.2
+* **Feature** Addition of Value Added Services to Requests
+* **Feature** AtaxIdType to API Requests
+* 
 ## 15.0.1
 * **Feature** Support for Merchant Category Code - Payfac MP API version 15.0.1
 
